@@ -1,0 +1,92 @@
+
+    :root {
+      --white-color: #ffffff;
+      --black-color: #000000;
+      --primary-color: #ff1d50;
+      --secondary-color: #2196f3;
+      --card-bg: #1c1c1c;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--black-color);
+      color: var(--white-color);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: antiquewhite;
+    }
+
+    .movie-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      justify-content: center;
+    }
+
+    .movie-card {
+        width: 180px;
+        height: 350px;
+        perspective: 1000px;
+        padding-top: 50px;
+    }
+
+    .movie-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .movie-card:hover .movie-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .movie-card-front,
+    .movie-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .movie-card-front {
+      background-color: var(--card-bg);
+    }
+
+    .movie-card-front img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--primary-color);
+    }
+
+    .movie-card-back {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotateY(180deg);
+    }
+
+    .movie-details {
+      padding: 10px;
+    }
+
+    .movie-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .movie-year {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
