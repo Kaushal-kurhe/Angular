@@ -46896,38 +46896,33 @@ var LoginComponent = class _LoginComponent {
   constructor(router, platformId) {
     this.router = router;
     this.platformId = platformId;
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
+  isBrowser;
   signupUsers = [];
-  signupObj = {
-    userName: "",
-    email: "",
-    password: ""
-  };
-  loginobj = {
-    userName: "",
-    password: "",
-    email: ""
-  };
+  signupObj = { userName: "", email: "", password: "" };
+  loginobj = { userName: "", password: "", email: "" };
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const localData = localStorage.getItem("signupUsers");
-      if (localData != null)
+    if (this.isBrowser) {
+      const localData = localStorage.getItem("signUpUsers");
+      if (localData) {
         this.signupUsers = JSON.parse(localData);
+      }
     }
   }
   onSignup() {
-    this.signupUsers.push(this.signupObj);
-    localStorage.setItem("signUpUsers", JSON.stringify(this.signupUsers));
-    this.signupObj = {
-      userName: "",
-      email: "",
-      password: ""
-    };
+    if (this.isBrowser) {
+      this.signupUsers.push(__spreadValues({}, this.signupObj));
+      localStorage.setItem("signUpUsers", JSON.stringify(this.signupUsers));
+    }
+    this.signupObj = { userName: "", email: "", password: "" };
   }
   onLogin() {
-    const isUserExist = this.signupUsers.find((m) => m.userName == this.loginobj.userName && m.password == this.loginobj.password);
-    if (isUserExist != void 0) {
-      alert("User Login Successfull");
+    if (!this.isBrowser)
+      return;
+    const isUserExist = this.signupUsers.find((user) => user.userName === this.loginobj.userName && user.password === this.loginobj.password);
+    if (isUserExist) {
+      alert("User Login Successful");
       this.router.navigate(["movie"]);
     } else {
       alert("Wrong credentials");
@@ -47012,7 +47007,7 @@ var LoginComponent = class _LoginComponent {
   }, dependencies: [FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ['\n\n.login-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  background-color: #ffcc00;\n  text-align: center;\n  padding: 20px;\n}\n.film[_ngcontent-%COMP%] {\n  margin-bottom: 20px;\n}\n.logo[_ngcontent-%COMP%] {\n  font-size: 36px;\n  font-weight: bold;\n  font-family: "Creepster", cursive;\n  color: black;\n  margin-bottom: 10px;\n}\n.desc[_ngcontent-%COMP%] {\n  max-width: 600px;\n  font-size: 18px;\n  font-family: "Cinzel", serif;\n  color: black;\n  line-height: 1.5;\n}\nbody[_ngcontent-%COMP%] {\n  margin: 0;\n  padding: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  font-family: "Jost", sans-serif;\n  background:\n    linear-gradient(\n      to bottom,\n      #0f0c29,\n      #302b63,\n      #24243e);\n}\n.main[_ngcontent-%COMP%] {\n  width: 350px;\n  height: 500px;\n  background: red;\n  overflow: hidden;\n  background: url(https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38) no-repeat center/ cover;\n  border-radius: 10px;\n  box-shadow: 5px 20px 50px #000;\n}\n#chk[_ngcontent-%COMP%] {\n  display: none;\n}\n.signup[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  height: 100%;\n}\nlabel[_ngcontent-%COMP%] {\n  color: #fff;\n  font-size: 2.3em;\n  justify-content: center;\n  display: flex;\n  margin: 50px;\n  font-weight: bold;\n  cursor: pointer;\n  transition: .5s ease-in-out;\n}\ninput[_ngcontent-%COMP%] {\n  width: 60%;\n  height: 10px;\n  background: #e0dede;\n  justify-content: center;\n  display: flex;\n  margin: 20px auto;\n  padding: 12px;\n  border: none;\n  outline: none;\n  border-radius: 5px;\n}\nbutton[_ngcontent-%COMP%] {\n  width: 60%;\n  height: 40px;\n  margin: 10px auto;\n  justify-content: center;\n  display: block;\n  color: #fff;\n  background: #573b8a;\n  font-size: 1em;\n  font-weight: bold;\n  margin-top: 30px;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  transition: .2s ease-in;\n  cursor: pointer;\n}\nbutton[_ngcontent-%COMP%]:hover {\n  background: #6d44b8;\n}\n.login[_ngcontent-%COMP%] {\n  height: 460px;\n  background: #eee;\n  border-radius: 60% / 10%;\n  transform: translateY(-180px);\n  transition: .8s ease-in-out;\n}\n.login[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  color: #573b8a;\n  transform: scale(.6);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .login[_ngcontent-%COMP%] {\n  transform: translateY(-500px);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .login[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  transform: scale(1);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .signup[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  transform: scale(.6);\n}'] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/login/login.component.ts", lineNumber: 17 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/login/login.component.ts", lineNumber: 13 });
 })();
 
 // src/app/home/home.component.ts
