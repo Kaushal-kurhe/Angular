@@ -3,6 +3,8 @@ import { json } from 'stream/consumers';
 import { FormsModule } from '@angular/forms';
 // import { Router } from 'express';
 import { Router } from '@angular/router'; 
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
+  
    
   signupUsers : any[] = [];
   signupObj : any = {
@@ -26,12 +29,14 @@ export class LoginComponent implements OnInit{
     email : ''
 
   }
-   constructor(private router: Router){}
+   constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: object){}
 
    ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
      const localData = localStorage.getItem('signupUsers')
      if(localData != null )
       this.signupUsers = JSON.parse(localData); 
+    }
    }
    onSignup(){
    this.signupUsers.push(this.signupObj)

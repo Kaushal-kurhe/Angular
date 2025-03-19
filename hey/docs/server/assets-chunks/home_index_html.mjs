@@ -1,6 +1,6 @@
 export default `<html><head><link rel="stylesheet" href="styles-LCU7K4PN.css"></head><body><!--nghm-->
   <app-root ng-version="19.2.2" ngh="1" ng-server-context="ssg"><router-outlet></router-outlet><app-home ngh="0"><p>home works!</p></app-home><!--container--></app-root>
-<script src="polyfills-KIGPDB5H.js" type="module"></script><script src="scripts-23HNY6EK.js" defer=""></script><script src="main-TSD6R564.js" type="module"></script> 
+<script src="polyfills-KIGPDB5H.js" type="module"></script><script src="scripts-23HNY6EK.js" defer=""></script><script src="main-ZXNPI7BF.js" type="module"></script> 
 
 
 

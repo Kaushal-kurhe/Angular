@@ -74431,8 +74431,9 @@ var AppComponent = class _AppComponent {
 
 // src/app/login/login.component.ts
 var LoginComponent = class _LoginComponent {
-  constructor(router) {
+  constructor(router, platformId) {
     this.router = router;
+    this.platformId = platformId;
   }
   signupUsers = [];
   signupObj = {
@@ -74446,9 +74447,11 @@ var LoginComponent = class _LoginComponent {
     email: ""
   };
   ngOnInit() {
-    const localData = localStorage.getItem("signupUsers");
-    if (localData != null)
-      this.signupUsers = JSON.parse(localData);
+    if (isPlatformBrowser(this.platformId)) {
+      const localData = localStorage.getItem("signupUsers");
+      if (localData != null)
+        this.signupUsers = JSON.parse(localData);
+    }
   }
   onSignup() {
     this.signupUsers.push(this.signupObj);
@@ -74469,7 +74472,7 @@ var LoginComponent = class _LoginComponent {
     }
   }
   static \u0275fac = function LoginComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LoginComponent)(\u0275\u0275directiveInject(Router));
+    return new (__ngFactoryType__ || _LoginComponent)(\u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(PLATFORM_ID));
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 25, vars: 5, consts: [[1, "login-container"], ["src", "https://picsum.photos/300/200", "alt", "Film Reel", 1, "film"], [1, "logo"], [1, "desc"], [1, "main"], ["type", "checkbox", "id", "chk", "aria-hidden", "true"], [1, "signup"], ["for", "chk", "aria-hidden", "true"], ["type", "text", "name", "txt", "placeholder", "User name", 3, "ngModelChange", "ngModel"], ["type", "email", "name", "email", "placeholder", "Email", 3, "ngModelChange", "ngModel"], ["type", "password", "name", "pswd", "placeholder", "Password", 3, "ngModelChange", "ngModel"], [3, "click"], [1, "login"], ["type", "userName", "name", "userName", "placeholder", "userName", 3, "ngModelChange", "ngModel"], ["type", "password", "name", "psword", "placeholder", "Password", 3, "ngModelChange", "ngModel"]], template: function LoginComponent_Template(rf, ctx) {
     if (rf & 1) {
@@ -74547,7 +74550,7 @@ var LoginComponent = class _LoginComponent {
   }, dependencies: [FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm], styles: ['\n\n.login-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  background-color: #ffcc00;\n  text-align: center;\n  padding: 20px;\n}\n.film[_ngcontent-%COMP%] {\n  margin-bottom: 20px;\n}\n.logo[_ngcontent-%COMP%] {\n  font-size: 36px;\n  font-weight: bold;\n  font-family: "Creepster", cursive;\n  color: black;\n  margin-bottom: 10px;\n}\n.desc[_ngcontent-%COMP%] {\n  max-width: 600px;\n  font-size: 18px;\n  font-family: "Cinzel", serif;\n  color: black;\n  line-height: 1.5;\n}\nbody[_ngcontent-%COMP%] {\n  margin: 0;\n  padding: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  font-family: "Jost", sans-serif;\n  background:\n    linear-gradient(\n      to bottom,\n      #0f0c29,\n      #302b63,\n      #24243e);\n}\n.main[_ngcontent-%COMP%] {\n  width: 350px;\n  height: 500px;\n  background: red;\n  overflow: hidden;\n  background: url(https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38) no-repeat center/ cover;\n  border-radius: 10px;\n  box-shadow: 5px 20px 50px #000;\n}\n#chk[_ngcontent-%COMP%] {\n  display: none;\n}\n.signup[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  height: 100%;\n}\nlabel[_ngcontent-%COMP%] {\n  color: #fff;\n  font-size: 2.3em;\n  justify-content: center;\n  display: flex;\n  margin: 50px;\n  font-weight: bold;\n  cursor: pointer;\n  transition: .5s ease-in-out;\n}\ninput[_ngcontent-%COMP%] {\n  width: 60%;\n  height: 10px;\n  background: #e0dede;\n  justify-content: center;\n  display: flex;\n  margin: 20px auto;\n  padding: 12px;\n  border: none;\n  outline: none;\n  border-radius: 5px;\n}\nbutton[_ngcontent-%COMP%] {\n  width: 60%;\n  height: 40px;\n  margin: 10px auto;\n  justify-content: center;\n  display: block;\n  color: #fff;\n  background: #573b8a;\n  font-size: 1em;\n  font-weight: bold;\n  margin-top: 30px;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  transition: .2s ease-in;\n  cursor: pointer;\n}\nbutton[_ngcontent-%COMP%]:hover {\n  background: #6d44b8;\n}\n.login[_ngcontent-%COMP%] {\n  height: 460px;\n  background: #eee;\n  border-radius: 60% / 10%;\n  transform: translateY(-180px);\n  transition: .8s ease-in-out;\n}\n.login[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  color: #573b8a;\n  transform: scale(.6);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .login[_ngcontent-%COMP%] {\n  transform: translateY(-500px);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .login[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  transform: scale(1);\n}\n#chk[_ngcontent-%COMP%]:checked    ~ .signup[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  transform: scale(.6);\n}'] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/login/login.component.ts", lineNumber: 15 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/login/login.component.ts", lineNumber: 17 });
 })();
 
 // src/app/home/home.component.ts
